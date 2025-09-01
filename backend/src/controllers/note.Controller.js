@@ -1,23 +1,30 @@
-
+import noteModel from "../models/note.Schema.js"
 
 // get all note
 export const getAllNotes = async (req, res) => {
      try {
-          res.send('get all notes')
+          const notes = await noteModel.find()
+          res.status(200).json(notes);
      } catch (err) {
           console.error('error occured fecting the note')
+          res.status(500).json({
+               sucess: false,
+               message: "Error fetching Notes"
+          })
      }
 }
 
 // create note
 export const createNote = async (req, res) => {
      try {
-          const { title, description } = req.body;
+          const { title, content } = req.body;
           
-          if (!title || description) {
+          if (!title || content) {
                res.send("Provide both title and description to create a note")
           }
+
           
+
           res.send('create a note')
      } catch (err) {}
 }
