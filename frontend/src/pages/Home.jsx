@@ -4,7 +4,7 @@ import RateLimitUI from '../components/RateLimitUI';
 import axios from 'axios'
 
 const Home = () => {
-  const [rateLimited, setRateLimited] = useState(true);
+  const [rateLimited, setRateLimited] = useState(false);
   const [notes, setNote] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -12,6 +12,7 @@ const Home = () => {
     const fetchNotes = async () => {
       try {
         const res = await axios.get("http://localhost:/api/notes");
+        console.log(res.data)
         setNote(res.data);
         setRateLimited(false);
 
